@@ -121,7 +121,7 @@ latih tetapi tidak lebih lambat saat inferensi.
 3. Unggul di **semua 5 kelas**, terbesar pada kelas motor.
 4. Biaya: latih ~2× lebih lama, parameter +7.9%, tetapi **inferensi sama cepat**
    layak dipakai untuk deployment di rompi.
-5. Kelas `lubang` masih rendah (< 0.12 mAP50-95) → kandidat perbaikan
+5. Kelas `lubang` masih rendah (< 0.12 mAP50-95) kandidat perbaikan
    (augmentasi/annotasi khusus) di tahap selanjutnya.
 
 ---
