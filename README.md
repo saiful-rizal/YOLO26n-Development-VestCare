@@ -15,7 +15,7 @@ Semua angka di halaman ini diambil langsung dari file CSV di [`hasil_06/`](hasil
 | Model | `yolo11n-seg.pt`, `yolo26n-seg.pt` (bobot pralatih Ultralytics) |
 | Kelas | pohon, lubang, orang, motor, mobil |
 | Rasio split train/val/test | 80 (sisa val+test) |
-| Seed split | 43, 44, 46 → **3 ulangan** per model |
+| Seed split | 43, 44, 46 (**3 ulangan** per model) |
 | Epoch | 10, `patience` 30 |
 | `imgsz` / `batch` | 416 / 1 |
 | Seed latih | 0, `deterministic=True` |
@@ -62,7 +62,7 @@ Run: 2 model × 3 seed split = **6 pelatihan**, masing-masing dievaluasi di val 
 | yolo11n-seg | 0.2622 ± 0.0218 | 0.5246 ± 0.0369 | 0.3502 ± 0.0123 | +0.0234 |
 | yolo26n-seg | 0.3306 ± 0.0094 | 0.5881 ± 0.0195 | 0.3994 ± 0.0347 | +0.0361 |
 
-Gap val–test kecil (< 0.04) → skor test dapat dipercaya, tidak ada overfitting berarti.
+Gap val–test kecil (< 0.04), sehingga skor test dapat dipercaya dan tidak ada overfitting berarti.
 
 ---
 
