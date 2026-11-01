@@ -1,0 +1,4 @@
+split,selisih_test_mask_map5095 (yolo26n-seg - yolo11n-seg)
+split_r80_s43,0.06170
+split_r80_s44,0.04912
+split_r80_s46,0.05635
