@@ -85,7 +85,29 @@ Selisih dihitung pada split dengan seed yang sama (`ringkasan_model.csv`):
 
 ---
 
-## 5. Akurasi per kelas (test mask mAP50-95, rata-rata 3 seed)
+## 5. Akurasi per kelas (test mask)
+
+### 5.1 `yolo11n-seg` — mAP50-95 per seed
+
+| Kelas | s43 | s44 | s46 | **Rata-rata** | P (rata2) | R (rata2) | mAP50 (rata2) |
+|---|---|---|---|---|---|---|---|
+| pohon | 0.19594 | 0.19978 | 0.18195 | **0.19256** | 0.622 | 0.309 | 0.319 |
+| lubang | 0.03857 | 0.06997 | 0.16796 | **0.09217** | 0.396 | 0.285 | 0.216 |
+| orang | 0.11453 | 0.14186 | 0.16139 | **0.13926** | 0.424 | 0.429 | 0.389 |
+| motor | 0.52295 | 0.24308 | 0.40204 | **0.38936** | 0.720 | 0.612 | 0.648 |
+| mobil | 0.36193 | 0.32013 | 0.45965 | **0.38057** | 0.713 | 0.554 | 0.599 |
+
+### 5.2 `yolo26n-seg` — mAP50-95 per seed
+
+| Kelas | s43 | s44 | s46 | **Rata-rata** | P (rata2) | R (rata2) | mAP50 (rata2) |
+|---|---|---|---|---|---|---|---|
+| pohon | 0.21351 | 0.25370 | 0.23944 | **0.23555** | 0.767 | 0.368 | 0.401 |
+| lubang | 0.03551 | 0.08834 | 0.21372 | **0.11252** | 0.430 | 0.248 | 0.246 |
+| orang | 0.12248 | 0.19231 | 0.16981 | **0.16153** | 0.601 | 0.647 | 0.515 |
+| motor | 0.75489 | 0.20599 | 0.55068 | **0.50385** | 0.787 | 0.801 | 0.761 |
+| mobil | 0.41605 | 0.48008 | 0.48112 | **0.45908** | 0.814 | 0.571 | 0.684 |
+
+### 5.3 Selisih rata-rata per kelas (`yolo26n-seg` − `yolo11n-seg`)
 
 | Kelas | yolo11n-seg | yolo26n-seg | Selisih |
 |---|---|---|---|
@@ -97,11 +119,40 @@ Selisih dihitung pada split dengan seed yang sama (`ringkasan_model.csv`):
 
 Kedua model paling kuat pada **motor** dan **mobil**, paling lemah pada **lubang**
 (objek kecil/tipis). `yolo26n-seg` lebih unggul di **semua kelas**, terbesar pada motor.
-Detail per run ada di [`hasil_06/per_kelas.csv`](hasil_06/per_kelas.csv).
+Data mentah per run: [`hasil_06/per_kelas.csv`](hasil_06/per_kelas.csv).
 
 ---
 
-## 6. Efisiensi
+## 6. Grafik
+
+### 6.1 Perbandingan model × rasio split (test mask mAP50-95 ± sd, dan seluruh indikator)
+
+![Perbandingan model x rasio](hasil_06/grafik/perbandingan_model_rasio.png)
+
+### 6.2 Confusion matrix pada test (seed s46)
+
+| yolo11n-seg | yolo26n-seg |
+|---|---|
+| ![CM 11n](runs/segment/hasil_06/plots/yolo11n-seg__split_r80_s46_test/confusion_matrix.png) | ![CM 26n](runs/segment/hasil_06/plots/yolo26n-seg__split_r80_s46_test/confusion_matrix.png) |
+
+### 6.3 Kurva PR mask pada test (seed s46)
+
+| yolo11n-seg | yolo26n-seg |
+|---|---|
+| ![PR 11n](runs/segment/hasil_06/plots/yolo11n-seg__split_r80_s46_test/MaskPR_curve.png) | ![PR 26n](runs/segment/hasil_06/plots/yolo26n-seg__split_r80_s46_test/MaskPR_curve.png) |
+
+### 6.4 Kurva F1 mask pada test (seed s46)
+
+| yolo11n-seg | yolo26n-seg |
+|---|---|
+| ![F1 11n](runs/segment/hasil_06/plots/yolo11n-seg__split_r80_s46_test/MaskF1_curve.png) | ![F1 26n](runs/segment/hasil_06/plots/yolo26n-seg__split_r80_s46_test/MaskF1_curve.png) |
+
+Grafik lain (kurva P/R, box, val, `results.png` latih per run) ada di
+[`runs/segment/hasil_06/`](runs/segment/hasil_06).
+
+---
+
+## 7. Efisiensi
 
 | Model | Parameter | Ukuran bobot | Waktu latih (rata2/run) | Inferensi test | 
 |---|---|---|---|---|
@@ -113,7 +164,7 @@ latih tetapi tidak lebih lambat saat inferensi.
 
 ---
 
-## 7. Kesimpulan
+## 8. Kesimpulan
 
 1. **`yolo26n-seg` lebih akurat di semua metrik**: mask mAP50-95 0.2945 vs 0.2388
    (+23.3% relatif), mAP50 0.5214 vs 0.4343, F1 0.5929 vs 0.4972.
@@ -126,7 +177,7 @@ latih tetapi tidak lebih lambat saat inferensi.
 
 ---
 
-## 8. Struktur repo (hanya tahap 6)
+## 9. Struktur repo (hanya tahap 6)
 
 ```
 06_bandingkan_model.py      skrip perbandingan model x split
@@ -143,7 +194,7 @@ runs/segment/hasil_06/
 yolo11n-seg.pt, yolo26n-seg.pt   bobot pralatih
 ```
 
-## 9. Menjalankan ulang
+## 10. Menjalankan ulang
 
 ```bash
 pip install -U ultralytics matplotlib
