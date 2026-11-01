@@ -39,7 +39,7 @@ Run: 2 model × 3 seed split = **6 pelatihan**, masing-masing dievaluasi di val 
 
 ---
 
-## 3. Ringkasan rata-rata ± simpangan baku lintas 3 seed (rasio 80)
+## 3. Ringkasan rata-rata simpangan baku lintas 3 seed (rasio 80)
 
 ### 3.1 Skor test (akurasi)
 
