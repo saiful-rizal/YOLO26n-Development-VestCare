@@ -1,4 +1,4 @@
-# VestCare — Pengembangan YOLO26n-seg (Tahap 6–8)
+# VestCare Pengembangan YOLO26n-seg 
 
 Eksperimen segmentasi objek jalan untuk penunjang tunanetra (rompi VestCare).
 Repo ini memuat perbandingan **YOLO11n-seg vs YOLO26n-seg** (tahap 6), pelatihan
@@ -39,7 +39,7 @@ Rincian per kelas/varian: [`docs/DATASET.md`](docs/DATASET.md).
 
 ---
 
-## TAHAP 6 — Perbandingan `yolo11n-seg` vs `yolo26n-seg`
+## TAHAP 6 Perbandingan `yolo11n-seg` vs `yolo26n-seg`
 
 Membandingkan kedua model pada dataset yang sama, hiperparameter identik, lalu
 mengevaluasi bobot terbaik pada split **val** dan **test**.
@@ -209,7 +209,7 @@ Run yang sudah punya JSON di `hasil_06/run_json/` otomatis dilewati (resumable).
 
 ---
 
-## TAHAP 7 — Latih final `yolo26n-seg`
+## TAHAP 7  Latih final `yolo26n-seg`
 
 Tahap 7 mengambil pemenang tahap 6, menggabungkan **train + val**, menyisihkan
 **val-internal 10%** secara berkelompok (varian dari gambar sumber yang sama dan
@@ -321,7 +321,7 @@ Kurva lengkap (box P/R/F1, mask P/R) dan `results.png` latih ada di
 
 ---
 
-## TAHAP 8 — Evaluasi mendalam model final
+## TAHAP 8 Evaluasi mendalam model final
 
 Tahap 8 mengevaluasi `models/best.pt` pada **430 gambar test asli** yang sama,
 ditambah pemecahan per varian gambar, analisis kesalahan tingkat gambar, contoh
