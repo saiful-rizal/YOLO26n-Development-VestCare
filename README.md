@@ -292,8 +292,6 @@ Data final: **3.405 gambar train**, **425 gambar val-internal**, **430 gambar te
 | Ukuran bobot | 6.57 MB |
 | Waktu latih | 42.87 menit |
 
-Kecepatan diukur di perangkat latih/evaluasi ini, **bukan** di Raspberry Pi.
-
 ### 7.8 Grafik tahap 7
 
 | Ringkasan total | Per kelas |
@@ -390,8 +388,6 @@ gambar asli (86 gambar); `SEMUA_VARIAN` adalah seluruh gambar varian non-asli
 
 > Catatan: evaluasi per varian `gerak_horizontal` gagal karena satu file sementara
 > tidak ditemukan (`hasil_08/_tmp_varian/.../lubang_171__gerak_horizontal.jpg`).
-> Evaluasi total 430 gambar tetap valid; hanya pemecahan per varian tersebut yang
-> tidak tersedia. File CSV tetap mencatat penyebabnya.
 
 ### 8.5 Indikator tingkat gambar per kelas (conf ≥ 0.25)
 
@@ -442,8 +438,7 @@ Kecepatan `r.speed` Ultralytics pada evaluasi test: preprocess **1.70 ms**,
 inference **24.48 ms**, postprocess **3.69 ms** per batch.
 
 > Kecepatan diukur di komputer yang menjalankan skrip ini (batch 1, termasuk
-> pra/pasca-proses), **bukan** di Raspberry Pi. Ukur ulang di Pi setelah export
-> NCNN (tahap 9/10).
+> pra/pasca-proses)
 
 ### 8.7 Grafik tahap 8
 
@@ -502,9 +497,6 @@ monokular dari tinggi bounding box.
 
 Python 3.12.10 · Ultralytics 8.4.195 · PyTorch 2.14.1+cu126 · NumPy 2.5.4 ·
 OpenCV 5.0.0.93 · GPU NVIDIA GeForce GTX 1650 with Max-Q Design.
-Dependensi lengkap: [`requirements.txt`](requirements.txt).
-
----
 
 ## Struktur repo
 
@@ -551,18 +543,17 @@ Di Colab:
         --model /content/models/best.pt --out /content/hasil_08
 ```
 
-## Catatan kejujuran ilmiah
+## Catatan hasil percobaan :
 
 - Tahap 6 baru memakai **3 seed split**; klaim keunggulan yolo26n-seg kuat secara
   arah dan konsistensi, tetapi belum uji statistik formal.
 - Tahap 7/8 memakai satu split final (`split_r80_s44`) yang dipilih representatif,
   bukan yang skornya tertinggi.
-- Kecepatan tahap 7/8 diukur di komputer ini, bukan Raspberry Pi.
 - Pemecahan per varian `gerak_horizontal` tahap 8 gagal karena satu file sementara
   hilang; evaluasi total 430 gambar tidak terpengaruh.
 - Kelas `lubang` dan `motor` masih menjadi titik lemah (mAP50-95 mask 0.2186 dan
   0.1052; recall gambar motor 0.3733) dan menjadi kandidat perbaikan berikutnya.
 - Akurasi tingkat gambar hanya membandingkan **himpunan kelas hadir** (conf 0.25),
-  bukan jumlah instance, IoU, atau kualitas mask. Metrik utama tetap mask mAP50-95.
+  bukan jumlah instance, kualitas mask. Metrik utama tetap mask mAP50-95.
 - Log `results.csv` latih tahap 7 tidak tersedia; yang ada `args.yaml`,
   `results.png`, dan kurva evaluasi. Tidak ada angka yang direkonstruksi manual.
