@@ -2,7 +2,9 @@
 __pycache__/
 *.pyc
 dataset_colab-001/
-hasil_07/dataset/
+hasil_07/dataset/images/
+hasil_07/dataset/labels/
+hasil_07/dataset/*.cache
 hasil_07/_arsip/
 hasil_08/_tmp_varian/
 hasil_08/_tmp_val/

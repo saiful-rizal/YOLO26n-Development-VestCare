@@ -1,0 +1,10 @@
+# Lingkungan yang dipakai untuk tahap 6-8 (Python 3.12.10)
+# Catatan: pasang wheel torch/torchvision sesuai CUDA perangkat.
+ultralytics==8.4.195
+torch==2.14.1
+torchvision==0.29.1
+numpy==2.5.4
+matplotlib==3.11.2
+opencv-python==5.0.0.93
+PyYAML==6.0.3
+Pillow==13.0.0

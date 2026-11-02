@@ -1,0 +1,4 @@
+dataset,split,gambar,instance,inst_pohon,inst_lubang,inst_orang,inst_motor,inst_mobil,img_pohon,img_lubang,img_orang,img_motor,img_mobil
+dataset_colab-001\dataset\split_r80_s44,train,3060,6465,1220,1105,1055,1275,1810,680,560,570,540,710
+dataset_colab-001\dataset\split_r80_s44,val,770,1440,330,280,245,135,450,170,140,145,135,180
+dataset_colab-001\dataset\split_r80_s44,test,430,905,195,230,155,75,250,95,80,80,75,100

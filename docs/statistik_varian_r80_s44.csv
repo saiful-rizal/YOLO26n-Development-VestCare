@@ -1,0 +1,16 @@
+split,varian,gambar,instance
+train,asli,612,1293
+train,gerak_diagonal,612,1293
+train,gerak_horizontal,612,1293
+train,gerak_vertikal,612,1293
+train,getar,612,1293
+val,asli,154,288
+val,gerak_diagonal,154,288
+val,gerak_horizontal,154,288
+val,gerak_vertikal,154,288
+val,getar,154,288
+test,asli,86,181
+test,gerak_diagonal,86,181
+test,gerak_horizontal,86,181
+test,gerak_vertikal,86,181
+test,getar,86,181

@@ -1,0 +1,10 @@
+path: C:/Users/DELL/Downloads/Training Yolo/hasil_07/dataset
+train: images/train
+val: images/val
+test: C:/Users/DELL/Downloads/Training Yolo/dataset_colab-001/dataset/split_r80_s44/images/test
+names:
+  0: pohon
+  1: lubang
+  2: orang
+  3: motor
+  4: mobil

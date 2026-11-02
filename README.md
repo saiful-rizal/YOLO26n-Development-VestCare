@@ -8,6 +8,10 @@ Kelas: **pohon, lubang, orang, motor, mobil**. Semua angka di halaman ini diambi
 langsung dari file CSV/JSON/TXT di [`hasil_06/`](hasil_06/), [`hasil_07/`](hasil_07/),
 dan [`hasil_08/`](hasil_08/).
 
+Dokumentasi lengkap: [laporan lengkap](docs/LAPORAN_LENGKAP.md) ·
+[dataset](docs/DATASET.md) · [galeri semua grafik](docs/GALERI.md) ·
+[requirements](requirements.txt).
+
 ---
 
 ## Ringkasan cepat
@@ -17,6 +21,21 @@ dan [`hasil_08/`](hasil_08/).
 | 6 | 2 model × 3 seed split, rasio 80 | yolo26n-seg mask mAP50-95 **0.2945 ± 0.0368** vs yolo11n-seg **0.2388 ± 0.0330** (+0.0557) |
 | 7 | Latih ulang pemenang di train+val, 100 epoch | yolo26n-seg r80 s44: mask mAP50-95 **0.2878**, box mAP50-95 **0.4028**, image-level per kelas akurasi 0.8907–1.0000 |
 | 8 | Evaluasi mendalam `models/best.pt` | akurasi tingkat gambar **0.8721 (375/430)**, F1-mikro **0.8863**, F1-makro **0.8643**, kecepatan **21.01 ms/gambar (~47.6 FPS)** |
+
+## Dataset
+
+Split resmi `split_r80_s44` (rasio 80, seed 44):
+
+| Split | Gambar | Instance |
+|---|---:|---:|
+| Train | 3.060 | 6.465 |
+| Val | 770 | 1.440 |
+| Test | 430 | 905 |
+| **Total** | **4.260** | **8.810** |
+
+Test set terdiri dari 5 varian seimbang (86 gambar/varian): `asli`,
+`gerak_diagonal`, `gerak_horizontal`, `gerak_vertikal`, `getar`.
+Rincian per kelas/varian: [`docs/DATASET.md`](docs/DATASET.md).
 
 ---
 
@@ -180,7 +199,7 @@ latih tetapi tidak lebih lambat saat inferensi.
 ### 6.9 Menjalankan ulang tahap 6
 
 ```bash
-pip install -U ultralytics matplotlib
+pip install -r requirements.txt
 # dataset split (split_r80_s43, s44, s46) harus sudah ada di --splits-dir
 python 06_bandingkan_model.py --splits-dir <folder_split> --out hasil_06 \
        --epochs 10 --imgsz 416 --batch 1
@@ -394,6 +413,17 @@ gambar asli (86 gambar); `SEMUA_VARIAN` adalah seluruh gambar varian non-asli
 | gerak_vertikal | 9 |
 | getar | 11 |
 
+Pola kesalahan dari 55 gambar salah:
+
+| Pola | Jumlah |
+|---|---:|
+| motor → mobil | **40** |
+| lubang terlewat | 5 |
+| motor terlewat | 5 |
+| motor → pohon | 2 |
+| orang + mobil nyasar | 2 |
+| mobil + lubang nyasar | 1 |
+
 Penyebab kesalahan terbanyak: kelas **motor** sering terlewat (47 FN; recall
 0.3733), sedangkan **mobil** cenderung memicu FP (42 FP; presisi 0.7042).
 Rincian per gambar ada di [`hasil_08/kesalahan_gambar.csv`](hasil_08/kesalahan_gambar.csv).
@@ -456,6 +486,26 @@ dan [`hasil_08/contoh_prediksi/salah/`](hasil_08/contoh_prediksi/salah).
 
 ---
 
+## Tahap 9 (usulan) — Fuzzy Sugeno
+
+[`fuzzysugeno.py`](fuzzysugeno.py) mengubah deteksi YOLO menjadi tingkat urgensi
+bahaya 0–100 dari jarak, bahaya kelas, dan porsi mask di jalur. Keluaran:
+**AMAN / INFO / WASPADA / BAHAYA**. [`jalankan_fuzzy.py`](jalankan_fuzzy.py)
+menjalankan YOLO-seg + fuzzy untuk webcam/gambar/video, termasuk estimasi jarak
+monokular dari tinggi bounding box.
+
+> Tahap ini belum dievaluasi kuantitatif karena belum ada ground truth urgensi.
+> Jangan mengklaim akurasi fuzzy sampai ada validasi. Detail aturan dan uji cepat:
+> [`docs/LAPORAN_LENGKAP.md`](docs/LAPORAN_LENGKAP.md#10-fuzzy-sugeno-usulan-tahap-9).
+
+## Lingkungan
+
+Python 3.12.10 · Ultralytics 8.4.195 · PyTorch 2.14.1+cu126 · NumPy 2.5.4 ·
+OpenCV 5.0.0.93 · GPU NVIDIA GeForce GTX 1650 with Max-Q Design.
+Dependensi lengkap: [`requirements.txt`](requirements.txt).
+
+---
+
 ## Struktur repo
 
 ```text
@@ -469,16 +519,19 @@ hasil_07/                       hasil latih final (laporan, CSV/JSON, grafik, ru
 hasil_08/                       hasil evaluasi final (laporan, CSV/JSON, grafik, contoh)
 models/best.pt                  bobot final hasil tahap 7
 runs/segment/hasil_06/          log latih & evaluasi tahap 6
+docs/                           laporan lengkap, dataset, galeri, statistik CSV
+requirements.txt                dependensi lingkungan
 yolo11n-seg.pt, yolo26n-seg.pt  bobot pralatih
 ```
 
-Folder `hasil_07/dataset/`, `hasil_07/_arsip/`, dan `dataset_colab-001/` tidak
-di-commit karena berisi dataset/arsip besar.
+Dataset besar (`dataset_colab-001/`, gambar/label di `hasil_07/dataset/`,
+`hasil_07/_arsip/`) tidak di-commit. Konfigurasi
+[`hasil_07/dataset/data.yaml`](hasil_07/dataset/data.yaml) tetap disertakan.
 
 ## Cara menjalankan ulang tahap 7 dan 8
 
 ```bash
-pip install -U ultralytics matplotlib
+pip install -r requirements.txt
 
 # Tahap 7: latih final (butuh split_r80_s44 dari tahap 5 dan hasil_06)
 python 07_latih_final.py --splits-dir <folder_split> --hasil06 hasil_06 \
@@ -509,3 +562,7 @@ Di Colab:
   hilang; evaluasi total 430 gambar tidak terpengaruh.
 - Kelas `lubang` dan `motor` masih menjadi titik lemah (mAP50-95 mask 0.2186 dan
   0.1052; recall gambar motor 0.3733) dan menjadi kandidat perbaikan berikutnya.
+- Akurasi tingkat gambar hanya membandingkan **himpunan kelas hadir** (conf 0.25),
+  bukan jumlah instance, IoU, atau kualitas mask. Metrik utama tetap mask mAP50-95.
+- Log `results.csv` latih tahap 7 tidak tersedia; yang ada `args.yaml`,
+  `results.png`, dan kurva evaluasi. Tidak ada angka yang direkonstruksi manual.
