@@ -1,0 +1,28 @@
+HASIL MODEL FINAL (test asli)
+             P       R      F1   mAP50  mAP50-95
+MASK    0.6774  0.5163  0.5860  0.5122    0.2878
+KOTAK   0.7883  0.5951  0.6782  0.6709    0.4028
+kecepatan: pra 1.5 ms | inferensi 19.3 ms | pasca 3.1 ms per gambar | 3.085 juta parameter | 6.57 MB | waktu latih 42.87 menit
+
+--- PER KELAS (mask | kotak) ---
+kelas          nImg nInst |      P      R     F1  mAP50  50-95 |      P      R     F1  mAP50  50-95
+pohon            95   195 |  0.606  0.403  0.484  0.425  0.284 |  0.730  0.485  0.583  0.578  0.345
+lubang           80   230 |  0.783  0.378  0.510  0.484  0.219 |  0.729  0.352  0.475  0.466  0.246
+orang            80   155 |  0.599  0.683  0.638  0.507  0.212 |  0.791  0.903  0.843  0.898  0.451
+motor            75    75 |  0.682  0.257  0.374  0.287  0.105 |  0.965  0.364  0.529  0.540  0.281
+mobil           100   250 |  0.717  0.860  0.782  0.857  0.619 |  0.727  0.872  0.793  0.873  0.691
+
+--- POSITIF/NEGATIF TINGKAT GAMBAR ---
+kelas             TP    FP    FN    TN |  Akurasi  Presisi   Recall       F1
+pohon             95     2     0   333 |   0.9953   0.9794   1.0000   0.9896
+lubang            75     1     5   349 |   0.9860   0.9868   0.9375   0.9615
+orang             80     0     0   350 |   1.0000   1.0000   1.0000   1.0000
+motor             28     0    47   355 |   0.8907   1.0000   0.3733   0.5437
+mobil            100    42     0   288 |   0.9023   0.7042   1.0000   0.8264
+
+Sumber metrik:
+- box_mask_precision_recall_map: Ultralytics model.val() pada test asli
+- f1: 2 * precision * recall / (precision + recall)
+- TP_FP_FN_TN: klasifikasi biner per kelas pada tingkat gambar dari label test dan model.predict(conf=0.25)
+- confusion_matrix: Ultralytics model.val(plots=True) dan matriks biner tingkat gambar
+- kecepatan: r.speed dari Ultralytics, dalam ms per batch pada perangkat ini

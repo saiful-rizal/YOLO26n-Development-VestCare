@@ -1,0 +1,52 @@
+RINGKASAN AKURASI (test asli)
+Model: models\best.pt | Split: split_r80_s44 | gambar test: 430
+
+             P       R      F1   mAP50  mAP50-95
+MASK    0.6774  0.5163  0.5860  0.5122    0.2878
+KOTAK   0.7883  0.5951  0.6782  0.6709    0.4028
+
+Tingkat-gambar (conf>=0.25): akurasi 0.8721 (375/430 benar) | P 0.8936 R 0.8791 F1-mikro 0.8863 F1-makro 0.8643
+Kecepatan di perangkat ini: 21.01 ms/gambar (~47.6 FPS)
+
+--- PER KELAS (mask | kotak) ---
+kelas          nImg nInst |      P      R     F1  mAP50  50-95 |      P      R     F1  mAP50  50-95
+pohon            95   195 |  0.606  0.403  0.484  0.425  0.284 |  0.730  0.485  0.583  0.578  0.345
+lubang           80   230 |  0.783  0.378  0.510  0.484  0.219 |  0.729  0.352  0.475  0.466  0.246
+orang            80   155 |  0.599  0.683  0.638  0.507  0.212 |  0.791  0.903  0.843  0.898  0.451
+motor            75    75 |  0.682  0.257  0.374  0.287  0.105 |  0.965  0.364  0.529  0.540  0.281
+mobil           100   250 |  0.717  0.860  0.782  0.857  0.619 |  0.727  0.872  0.793  0.873  0.691
+
+--- PER VARIAN (mask | kotak) ---
+varian                  n |      P      R     F1  mAP50  50-95 |      P      R     F1  mAP50  50-95
+ASLI                   86 |  0.671  0.521  0.586  0.526  0.306 |  0.813  0.609  0.696  0.674  0.425
+SEMUA_VARIAN          344 |  0.679  0.514  0.585  0.513  0.286 |  0.781  0.591  0.673  0.673  0.400
+asli                   86 |  0.671  0.521  0.586  0.526  0.306 |  0.813  0.609  0.696  0.674  0.425
+gerak_diagonal         86 |  0.710  0.502  0.588  0.529  0.299 |  0.833  0.575  0.680  0.679  0.403
+gerak_horizontal       86   (gagal: Caught FileNotFoundError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "C:\Users\DELL\Downloads\Training Yolo\.venv\Lib\site-packages\torch\utils\data\_utils\worker.py", line 375, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Downloads\Training Yolo\.venv\Lib\site-packages\torch\utils\data\_utils\fetch.py", line 54, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "C:\Users\DELL\Downloads\Training Yolo\.venv\Lib\site-packages\ultralytics\data\base.py", line 441, in __getitem__
+    return self.transforms(self.get_image_and_label(index))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Downloads\Training Yolo\.venv\Lib\site-packages\ultralytics\data\base.py", line 454, in get_image_and_label
+    label["img"], label["ori_shape"], label["resized_shape"] = self.load_image(index)
+                                                               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Downloads\Training Yolo\.venv\Lib\site-packages\ultralytics\data\base.py", line 294, in load_image
+    raise FileNotFoundError(f"Image Not Found {f}")
+FileNotFoundError: Image Not Found C:\Users\DELL\Downloads\Training Yolo\hasil_08\_tmp_varian\gerak_horizontal\images\test\lubang_171__gerak_horizontal.jpg
+)
+gerak_vertikal         86 |  0.630  0.550  0.587  0.537  0.295 |  0.710  0.622  0.663  0.688  0.422
+getar                  86 |  0.684  0.529  0.597  0.519  0.294 |  0.798  0.612  0.693  0.665  0.404
+
+--- PER KELAS TINGKAT-GAMBAR ---
+kelas            TP   FP   FN       P       R      F1
+pohon            95    2    0   0.979   1.000   0.990
+lubang           75    1    5   0.987   0.938   0.962
+orang            80    0    0   1.000   1.000   1.000
+motor            28    0   47   1.000   0.373   0.544
+mobil           100   42    0   0.704   1.000   0.826

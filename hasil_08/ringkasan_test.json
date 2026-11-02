@@ -1,0 +1,93 @@
+{
+ "model": "models\\best.pt",
+ "split": "split_r80_s44",
+ "total": {
+  "mask_p": 0.6773953073467882,
+  "mask_r": 0.516336846669134,
+  "mask_map50": 0.5121600525979249,
+  "mask_map5095": 0.28775193373156066,
+  "box_p": 0.7882679611060542,
+  "box_r": 0.5951340128503115,
+  "box_map50": 0.6709494825112603,
+  "box_map5095": 0.40282671738622855,
+  "mask_f1": 0.5860010652594757,
+  "box_f1": 0.6782194672640768,
+  "speed_ms_ultralytics": {
+   "preprocess": 1.7018081392242768,
+   "inference": 24.478089534961835,
+   "loss": 0.0094558137366115,
+   "postprocess": 3.6883346513752975
+  }
+ },
+ "kesalahan": {
+  "gambar_test": 430,
+  "salah_tingkat_gambar": 55,
+  "akurasi_tingkat_gambar": 0.8721,
+  "presisi_mikro_gambar": 0.8936,
+  "recall_mikro_gambar": 0.8791,
+  "f1_mikro_gambar": 0.8863,
+  "f1_makro_gambar": 0.8643,
+  "salah_per_varian": {
+   "gerak_diagonal": 10,
+   "asli": 13,
+   "getar": 11,
+   "gerak_horizontal": 12,
+   "gerak_vertikal": 9
+  },
+  "per_kelas": [
+   {
+    "kelas": "pohon",
+    "TP": 95,
+    "FP": 2,
+    "FN": 0,
+    "presisi_gambar": 0.979381443298969,
+    "recall_gambar": 1.0,
+    "f1_gambar": 0.9895833333333333
+   },
+   {
+    "kelas": "lubang",
+    "TP": 75,
+    "FP": 1,
+    "FN": 5,
+    "presisi_gambar": 0.9868421052631579,
+    "recall_gambar": 0.9375,
+    "f1_gambar": 0.9615384615384615
+   },
+   {
+    "kelas": "orang",
+    "TP": 80,
+    "FP": 0,
+    "FN": 0,
+    "presisi_gambar": 1.0,
+    "recall_gambar": 1.0,
+    "f1_gambar": 1.0
+   },
+   {
+    "kelas": "motor",
+    "TP": 28,
+    "FP": 0,
+    "FN": 47,
+    "presisi_gambar": 1.0,
+    "recall_gambar": 0.37333333333333335,
+    "f1_gambar": 0.5436893203883496
+   },
+   {
+    "kelas": "mobil",
+    "TP": 100,
+    "FP": 42,
+    "FN": 0,
+    "presisi_gambar": 0.704225352112676,
+    "recall_gambar": 1.0,
+    "f1_gambar": 0.8264462809917354
+   }
+  ]
+ },
+ "kecepatan": {
+  "n_gambar": 100,
+  "ms_rata2": 21.01,
+  "ms_median": 19.31,
+  "ms_maks": 37.54,
+  "fps_rata2": 47.6,
+  "catatan": "diukur di perangkat ini (batch 1, termasuk pra/pasca-proses), bukan di Raspberry Pi"
+ }
+}

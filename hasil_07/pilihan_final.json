@@ -1,0 +1,12 @@
+{
+ "model": "yolo26n-seg",
+ "rasio": 80,
+ "seed_split": 44,
+ "split": "split_r80_s44",
+ "catatan": [
+  "rasio ditentukan manual: 80",
+  "model ditentukan manual: yolo26n-seg",
+  "seed ditentukan manual"
+ ],
+ "waktu": "2026-11-01T23:42:40"
+}

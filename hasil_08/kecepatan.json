@@ -1,0 +1,8 @@
+{
+ "n_gambar": 100,
+ "ms_rata2": 21.01,
+ "ms_median": 19.31,
+ "ms_maks": 37.54,
+ "fps_rata2": 47.6,
+ "catatan": "diukur di perangkat ini (batch 1, termasuk pra/pasca-proses), bukan di Raspberry Pi"
+}

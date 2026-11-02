@@ -1,0 +1,25 @@
+varian,n_gambar,mask_p,mask_r,mask_f1,mask_map50,mask_map5095,box_p,box_r,box_f1,box_map50,box_map5095,catatan
+ASLI,86,0.67072,0.52104,0.58648,0.52573,0.30632,0.81273,0.60859,0.69600,0.67353,0.42521,
+SEMUA_VARIAN,344,0.67877,0.51389,0.58493,0.51273,0.28598,0.78128,0.59076,0.67279,0.67265,0.40013,
+asli,86,0.67072,0.52104,0.58648,0.52573,0.30632,0.81273,0.60859,0.69600,0.67353,0.42521,
+gerak_diagonal,86,0.71034,0.50216,0.58838,0.52899,0.29905,0.83301,0.57477,0.68021,0.67933,0.40335,
+gerak_horizontal,86,,,,,,,,,,,"gagal: Caught FileNotFoundError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File ""C:\Users\DELL\Downloads\Training Yolo\.venv\Lib\site-packages\torch\utils\data\_utils\worker.py"", line 375, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+           ^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\DELL\Downloads\Training Yolo\.venv\Lib\site-packages\torch\utils\data\_utils\fetch.py"", line 54, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File ""C:\Users\DELL\Downloads\Training Yolo\.venv\Lib\site-packages\ultralytics\data\base.py"", line 441, in __getitem__
+    return self.transforms(self.get_image_and_label(index))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\DELL\Downloads\Training Yolo\.venv\Lib\site-packages\ultralytics\data\base.py"", line 454, in get_image_and_label
+    label[""img""], label[""ori_shape""], label[""resized_shape""] = self.load_image(index)
+                                                               ^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\DELL\Downloads\Training Yolo\.venv\Lib\site-packages\ultralytics\data\base.py"", line 294, in load_image
+    raise FileNotFoundError(f""Image Not Found {f}"")
+FileNotFoundError: Image Not Found C:\Users\DELL\Downloads\Training Yolo\hasil_08\_tmp_varian\gerak_horizontal\images\test\lubang_171__gerak_horizontal.jpg
+"
+gerak_vertikal,86,0.63028,0.54986,0.58733,0.53745,0.29528,0.71027,0.62230,0.66338,0.68831,0.42209,
+getar,86,0.68367,0.52940,0.59672,0.51867,0.29424,0.79809,0.61209,0.69283,0.66528,0.40356,
